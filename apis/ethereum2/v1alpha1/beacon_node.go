@@ -24,6 +24,10 @@ type BeaconNodeSpec struct {
 	// CheckpointSyncURL is trusted beacon node rest api endpoint
 	CheckpointSyncURL string `json:"checkpointSyncUrl,omitempty"`
 
+	// Bootnodes is set of ethereum node URLS for p2p discovery bootstrap
+	// +listType=set
+	Bootnodes []Enode `json:"bootnodes,omitempty"`
+
 	// REST enables Beacon REST API
 	REST bool `json:"rest,omitempty"`
 	// RESTPort is Beacon REST API server port
@@ -63,6 +67,9 @@ type BeaconNodeSpec struct {
 // BeaconNodeStatus defines the observed state of BeaconNode
 type BeaconNodeStatus struct {
 }
+
+// Enode is ethereum node url
+type Enode string
 
 // +kubebuilder:object:root=true
 

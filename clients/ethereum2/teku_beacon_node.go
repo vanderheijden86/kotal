@@ -52,6 +52,14 @@ func (t *TekuBeaconNode) Args() (args []string) {
 
 	args = append(args, TekuP2PPort, fmt.Sprintf("%d", node.Spec.P2PPort))
 
+	if len(node.Spec.Bootnodes) != 0 {
+		bootnodes := []string{}
+		for _, bootnode := range node.Spec.Bootnodes {
+			bootnodes = append(bootnodes, string(bootnode))
+		}
+		args = append(args, TekuBootnodes, strings.Join(bootnodes, ","))
+	}
+
 	return
 }
 
