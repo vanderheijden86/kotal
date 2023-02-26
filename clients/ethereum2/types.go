@@ -32,6 +32,8 @@ const (
 	TekuRestHost = "--rest-api-interface"
 	// TekuP2PPort is the argument used p2p and discovery port
 	TekuP2PPort = "--p2p-port"
+	//TekuBootnodes is a list of comma-separated Ethereum Node Records (ENRs) for P2P discovery bootstrap.
+	TekuBootnodes = "--p2p-discovery-bootnodes"
 	// TekuRESTAPICorsOrigins is the argument used to whitelist domains for cross domain requests
 	TekuRESTAPICorsOrigins = "--rest-api-cors-origins"
 	// TekuRESTAPIHostAllowlist is the argument used to whitelist hosts for API access
