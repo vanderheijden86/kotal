@@ -260,6 +260,18 @@ func (r *BeaconNodeReconciler) nodeVolumes(node *ethereum2v1alpha1.BeaconNode) (
 		},
 	})
 
+	configVolume := corev1.Volume{
+		Name: "config",
+		VolumeSource: corev1.VolumeSource{
+			ConfigMap: &corev1.ConfigMapVolumeSource{
+				LocalObjectReference: corev1.LocalObjectReference{
+					Name: node.Name,
+				},
+			},
+		},
+	}
+	volumes = append(volumes, configVolume)
+
 	return
 }
 
@@ -286,6 +298,13 @@ func (r *BeaconNodeReconciler) nodeVolumeMounts(node *ethereum2v1alpha1.BeaconNo
 		MountPath: shared.PathSecrets(homeDir),
 	}
 	mounts = append(mounts, secretMount)
+
+	configMount := corev1.VolumeMount{
+		Name:      "config",
+		MountPath: shared.PathConfig(homeDir),
+		ReadOnly:  true,
+	}
+	mounts = append(mounts, configMount)
 
 	return
 }
