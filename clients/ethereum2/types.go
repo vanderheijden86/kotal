@@ -26,6 +26,8 @@ const (
 	TekuDataPath = "--data-path"
 	// TekuRestEnabled is the argument used to enable Beacon REST API
 	TekuRestEnabled = "--rest-api-enabled"
+	// TekuRestApiDocsEnabled is the argument used to enable Beacon REST API docs
+	TekuRestApiDocsEnabled = "--rest-api-docs-enabled"
 	// TekuRestPort is the argument used for Beacon REST API server port
 	TekuRestPort = "--rest-api-port"
 	// TekuRestHost is the argument used for Beacon REST API server host
