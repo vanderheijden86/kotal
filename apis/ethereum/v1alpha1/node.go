@@ -49,6 +49,11 @@ type NodeSpec struct {
 	// Genesis is genesis block configuration
 	Genesis *Genesis `json:"genesis,omitempty"`
 
+	// CustomGenesisFileConfigMapName is the name of the configmap you use to mount a specific custom genesis JSON file.
+	// The key of the data (file) in Configmap should be "custom-genesis.json".
+	// Note that this overrides any and all properties defined in the Genesis field of the node's spec.
+	CustomGenesisFileConfigMapName string `json:"customGenesisFileConfigMapName,omitempty"`
+
 	// Network specifies the network to join
 	Network string `json:"network,omitempty"`
 
