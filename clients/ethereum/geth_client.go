@@ -79,12 +79,10 @@ func (g *GethClient) Args() (args []string) {
 		args = append(args, GethBootnodes, strings.Join(bootnodes, ","))
 	}
 
-	if node.Spec.Genesis == nil || node.Spec.CustomGenesisFileConfigMapName == "" {
+	if node.Spec.Genesis == nil {
 		args = append(args, fmt.Sprintf("--%s", node.Spec.Network))
 	} else {
-		if node.Spec.CustomGenesisFileConfigMapName == "" {
-			args = append(args, GethNoDiscovery)
-		}
+		args = append(args, GethNoDiscovery)
 		args = append(args, GethNetworkID, fmt.Sprintf("%d", node.Spec.Genesis.NetworkID))
 	}
 
