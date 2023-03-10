@@ -251,7 +251,7 @@ func (r *NodeReconciler) specConfigmap(node *ethereumv1alpha1.Node, configmap *c
 		key = "static-nodes.json"
 	}
 
-	if node.Spec.Genesis != nil || node.Spec.CustomGenesisFileConfigMapName != "" {
+	if node.Spec.Genesis != nil {
 		configmap.Data["genesis.json"] = genesis
 		if node.Spec.Client == ethereumv1alpha1.GethClient {
 			configmap.Data["geth-init-genesis.sh"] = GethInitGenesisScript
@@ -302,22 +302,9 @@ func (r *NodeReconciler) reconcileConfigmap(ctx context.Context, node *ethereumv
 
 	staticNodes := client.EncodeStaticNodes()
 
-	// when CustomGenesisFileConfigMapName is set, use it to mount the genesis file from the configmap with this name
-	if node.Spec.CustomGenesisFileConfigMapName != "" {
-		customConfigMapName := types.NamespacedName{
-			Name:      node.Spec.CustomGenesisFileConfigMapName,
-			Namespace: node.Namespace,
-		}
-		customGenesisConfigMap := &corev1.ConfigMap{}
-		if err = r.Client.Get(ctx, customConfigMapName, &corev1.ConfigMap{}); err != nil {
-			log.Error(err, "unable to get custom genesis configmap")
-		}
+	// private network with custom genesis
+	if node.Spec.Genesis != nil {
 
-		// TODO: Implement similar custom genesis logic for other clients
-		// get the data field with key custom-genesis.json from this configmap
-		genesis = customGenesisConfigMap.Data["custom-genesis.json"]
-	} else if node.Spec.Genesis != nil {
-		// private network with custom genesis
 		// create client specific genesis configuration
 		if genesis, err = client.Genesis(); err != nil {
 			return err
