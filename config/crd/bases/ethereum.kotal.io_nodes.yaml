@@ -96,16 +96,14 @@ spec:
                           type: string
                         balance:
                           description: Balance is account balance in wei
-                          pattern: ^0[xX][0-9a-fA-F]+$
                           type: string
                         code:
                           description: Code is account contract byte code
-                          pattern: ^0[xX][0-9a-fA-F]+$
                           type: string
                         storage:
                           additionalProperties:
                             description: HexString is String in hexadecial format
-                            pattern: ^0[xX][0-9a-fA-F]+$
+                              // +kubebuilder:validation:Pattern="^0[xX][0-9a-fA-F]+$"
                             type: string
                           description: Storage is account contract storage as key
                             value pair
@@ -144,7 +142,6 @@ spec:
                     type: string
                   difficulty:
                     description: Difficulty is the diffculty of the genesis block
-                    pattern: ^0[xX][0-9a-fA-F]+$
                     type: string
                   ethash:
                     description: Ethash PoW engine configuration
@@ -201,7 +198,6 @@ spec:
                   gasLimit:
                     description: GastLimit is the total gas limit for all transactions
                       in a block
-                    pattern: ^0[xX][0-9a-fA-F]+$
                     type: string
                   ibft2:
                     description: IBFT2 PoA engine configuration
@@ -250,11 +246,9 @@ spec:
                     type: integer
                   nonce:
                     description: Nonce is random number used in block computation
-                    pattern: ^0[xX][0-9a-fA-F]+$
                     type: string
                   timestamp:
                     description: Timestamp is block creation date
-                    pattern: ^0[xX][0-9a-fA-F]+$
                     type: string
                 required:
                 - chainId

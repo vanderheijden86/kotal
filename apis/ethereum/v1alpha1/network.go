@@ -24,7 +24,8 @@ const (
 )
 
 // HexString is String in hexadecial format
-// +kubebuilder:validation:Pattern="^0[xX][0-9a-fA-F]+$"
+// This is not needed, geth can handle non-hex strings
+// // +kubebuilder:validation:Pattern="^0[xX][0-9a-fA-F]+$"
 type HexString string
 
 // Hash is KECCAK-256 hash
