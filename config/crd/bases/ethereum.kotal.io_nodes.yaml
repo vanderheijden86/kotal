@@ -103,6 +103,7 @@ spec:
                         storage:
                           additionalProperties:
                             description: HexString is String in hexadecial format
+                              This is not needed, geth can handle non-hex strings
                               // +kubebuilder:validation:Pattern="^0[xX][0-9a-fA-F]+$"
                             type: string
                           description: Storage is account contract storage as key
